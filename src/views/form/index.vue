@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" label-width="150px">
-      <el-form-item label="The Number of NEs">
+    <el-form ref="form" :model="form" status-icon :rules="rules" label-width="150px">
+      <el-form-item label="The Number of NEs" prop="neCount">
         <el-input v-model="form.neCount" style="width:250px"></el-input>
       </el-form-item>
-      <el-form-item label="The First NE ID">
+      <el-form-item label="The First NE ID" prop="firstNeId">
         <el-input v-model="form.firstNeId" style="width:250px"></el-input>       
       </el-form-item>
       <el-form-item label="NE Type">
@@ -27,10 +27,10 @@
         </el-select>
         <!-- <el-switch v-model="form.neVersion"></el-switch> -->
       </el-form-item>
-      <el-form-item label="The First NE IP">
+      <el-form-item label="The First NE IP" prop="firstNeIp"> 
         <el-input v-model="form.firstNeIp" style="width:250px"></el-input>
       </el-form-item>
-      <el-form-item label="IP Mask">
+      <el-form-item label="IP Mask" prop="mask">
         <el-input v-model="form.mask" style="width:250px"></el-input>
       </el-form-item>
       <el-form-item label="Network Interface">
@@ -57,6 +57,43 @@
 <script>
 export default {
   data() {
+    var validateCount = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('please input number'))
+      } else if (isNaN(value - parseFloat(value))) {
+        callback(new Error('invalid number'))
+      } else {
+        callback()
+      }
+    }
+    var validateNeId = (rule, value, callback) => {
+      console.log(value)
+      if (value === '') {
+        callback(new Error('please input neid'))
+      } else if (isNaN(value - parseFloat(value))) {
+        callback(new Error('invalid neid'))
+      } else {
+        callback()
+      }
+    }
+    var validateNeIp = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('please input number'))
+      } else if (Number.isInteger(value)) {
+        callback(new Error('invalid number'))
+      } else {
+        callback()
+      }
+    }
+    var validateNeMask = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('please input number'))
+      } else if (Number.isInteger(value)) {
+        callback(new Error('invalid number'))
+      } else {
+        callback()
+      }
+    }
     return {
       form: {
         neCount: '',
@@ -66,6 +103,20 @@ export default {
         firstNeIp: '',
         mask: '',
         networkInterface: ''
+      },
+      rules: {
+        neCount: [
+          { validator: validateCount, trigger: 'blur' }
+        ],
+        firstNeId: [
+          { validator: validateNeId, trigger: 'blur' }
+        ],
+        firstNeIp: [
+          { validator: validateNeIp, trigger: 'blur' }
+        ],
+        mask: [
+          { validator: validateNeMask, trigger: 'blur' }
+        ]
       }
     }
   },
