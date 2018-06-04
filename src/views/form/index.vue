@@ -5,7 +5,7 @@
         <el-input v-model="form.neCount" style="width:250px"></el-input>
       </el-form-item>
       <el-form-item label="The First NE ID">
-        <el-input v-model="form.neCount" style="width:250px"></el-input>       
+        <el-input v-model="form.firstNeId" style="width:250px"></el-input>       
       </el-form-item>
       <el-form-item label="NE Type">
         <el-select v-model="form.neType" placeholder="please select NE Type" style="width:250px">
@@ -28,20 +28,10 @@
         <!-- <el-switch v-model="form.neVersion"></el-switch> -->
       </el-form-item>
       <el-form-item label="The First NE IP">
-        <el-checkbox-group v-model="form.firstNeIp">
-          <el-checkbox label="Online activities" name="type"></el-checkbox>
-          <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-          <el-checkbox label="Offline activities" name="type"></el-checkbox>
-          <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-        </el-checkbox-group>
+        <el-input v-model="form.firstNeIp" style="width:250px"></el-input>
       </el-form-item>
       <el-form-item label="IP Mask">
-        <el-checkbox-group v-model="form.mask">
-          <el-checkbox label="Online activities" name="type"></el-checkbox>
-          <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-          <el-checkbox label="Offline activities" name="type"></el-checkbox>
-          <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-        </el-checkbox-group>
+        <el-input v-model="form.mask" style="width:250px"></el-input>
       </el-form-item>
       <el-form-item label="Network Interface">
          <el-select v-model="form.networkInterface" placeholder="please select Network Interface" style="width:300px">
