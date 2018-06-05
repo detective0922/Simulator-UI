@@ -26,8 +26,17 @@ export function validateUpperCase(str) {
 }
 
 /* 大小写字母*/
-export function validatAlphabets(str) {
+export function validateAlphabets(str) {
   const reg = /^[A-Za-z]+$/
   return reg.test(str)
 }
 
+export function validateIp(str) {
+  const reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
+  return reg.test(str)
+}
+
+export function validateIpMask(str) {
+  const reg = /^(254|252|248|240|224|192|128|0)\.0\.0\.0|255\.(254|252|248|240|224|192|128|0)\.0\.0|255\.255\.(254|252|248|240|224|192|128|0)\.0|255\.255\.255\.(254|252|248|240|224|192|128|0)$/
+  return reg.test(str)
+}

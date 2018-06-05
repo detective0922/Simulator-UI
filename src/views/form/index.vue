@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { validateIp, validateIpMask } from '@/utils/validate'
+
 export default {
   data() {
     var validateCount = (rule, value, callback) => {
@@ -78,18 +80,18 @@ export default {
     }
     var validateNeIp = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('please input number'))
-      } else if (Number.isInteger(value)) {
-        callback(new Error('invalid number'))
+        callback(new Error('please input ne ip'))
+      } else if (!validateIp(value)) {
+        callback(new Error('invalid ne ip'))
       } else {
         callback()
       }
     }
     var validateNeMask = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('please input number'))
-      } else if (Number.isInteger(value)) {
-        callback(new Error('invalid number'))
+        callback(new Error('please input ne mask'))
+      } else if (!validateIpMask(value)) {
+        callback(new Error('invalid ne mask'))
       } else {
         callback()
       }
