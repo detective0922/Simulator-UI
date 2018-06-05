@@ -71,27 +71,27 @@ export default {
     var validateNeId = (rule, value, callback) => {
       console.log(value)
       if (value === '') {
-        callback(new Error('please input neid'))
+        callback(new Error('please input NE ID'))
       } else if (isNaN(value - parseFloat(value))) {
-        callback(new Error('invalid neid'))
+        callback(new Error('invalid NE ID'))
       } else {
         callback()
       }
     }
     var validateNeIp = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('please input ne ip'))
+        callback(new Error('please input NE IP'))
       } else if (!validateIp(value)) {
-        callback(new Error('invalid ne ip'))
+        callback(new Error('invalid NE IP'))
       } else {
         callback()
       }
     }
     var validateNeMask = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('please input ne mask'))
+        callback(new Error('please input NE Mask'))
       } else if (!validateIpMask(value)) {
-        callback(new Error('invalid ne mask'))
+        callback(new Error('invalid NE Mask'))
       } else {
         callback()
       }
@@ -113,18 +113,34 @@ export default {
         firstNeId: [
           { validator: validateNeId, trigger: 'blur' }
         ],
+        neType: [
+          { required: true, message: 'please select NE Type', trigger: 'change' }
+        ],
+        neVersion: [
+          { required: true, message: 'please select NE Version', trigger: 'change' }
+        ],
         firstNeIp: [
           { validator: validateNeIp, trigger: 'blur' }
         ],
         mask: [
           { validator: validateNeMask, trigger: 'blur' }
+        ],
+        networkInterface: [
+          { required: true, message: 'please select Network Interface', trigger: 'change' }
         ]
       }
     }
   },
   methods: {
     onSubmit(formName) {
-      this.$message('submit!')
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
     onReset(formName) {
       this.$refs[formName].resetFields()
