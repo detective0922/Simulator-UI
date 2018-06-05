@@ -7,7 +7,7 @@
       <el-form-item label="The First NE ID" prop="firstNeId">
         <el-input v-model="form.firstNeId" style="width:250px"></el-input>       
       </el-form-item>
-      <el-form-item label="NE Type">
+      <el-form-item label="NE Type" prop="neType">
         <el-select v-model="form.neType" placeholder="please select NE Type" style="width:250px">
           <el-option label="BG64" value="BG64"></el-option>
           <el-option label="NPT1200" value="NPT1200"></el-option>
@@ -20,7 +20,7 @@
           <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
         </el-col> -->
       </el-form-item>
-      <el-form-item label="NE Version">
+      <el-form-item label="NE Version" prop="neVersion">
         <el-select v-model="form.neVersion" placeholder="please select NE Version" style="width:250px" filterable allow-create default-first-option>
           <el-option label="V15.0" value="V15.0"></el-option>
           <el-option label="V15.1" value="V15.1"></el-option>
@@ -33,7 +33,7 @@
       <el-form-item label="IP Mask" prop="mask">
         <el-input v-model="form.mask" style="width:250px"></el-input>
       </el-form-item>
-      <el-form-item label="Network Interface">
+      <el-form-item label="Network Interface" prop="networkInterface">
          <el-select v-model="form.networkInterface" placeholder="please select Network Interface" style="width:300px">
           <el-option label="Broadcom1" value="Broadcom1"></el-option>
           <el-option label="Broadcom2" value="Broadcom2"></el-option>
@@ -47,8 +47,8 @@
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item> -->
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button @click="onCancel">Cancel</el-button>
+        <el-button type="primary" @click="onSubmit('form')">Create</el-button>
+        <el-button @click="onReset('form')">Reset</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -123,14 +123,11 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
+    onSubmit(formName) {
       this.$message('submit!')
     },
-    onCancel() {
-      this.$message({
-        message: 'cancel!',
-        type: 'warning'
-      })
+    onReset(formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
