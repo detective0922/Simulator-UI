@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" status-icon :rules="rules" label-width="150px">
+    <el-form ref="form" :model="form" status-icon :rules="rules" label-width="160px">
       <el-form-item label="The Number of NEs" prop="neCount">
         <el-input v-model="form.neCount" style="width:250px"></el-input>
       </el-form-item>
@@ -35,8 +35,10 @@
       </el-form-item>
       <el-form-item label="Network Interface" prop="networkInterface">
          <el-select v-model="form.networkInterface" placeholder="please select Network Interface" style="width:300px">
-          <el-option label="Broadcom1" value="Broadcom1"></el-option>
-          <el-option label="Broadcom2" value="Broadcom2"></el-option>
+          <!-- <el-option label="Broadcom1" value="Broadcom1"></el-option>
+          <el-option label="Broadcom2" value="Broadcom2"></el-option> -->
+          <el-option v-for="netIf in netIfList" :key="netIf.index" :label="netIf.description" :value="netIf.index">
+    </el-option>
         </el-select>
         <!-- <el-radio-group v-model="form.resource">
           <el-radio label="Sponsor"></el-radio>
@@ -56,6 +58,7 @@
 
 <script>
 import { validateIp, validateIpMask } from '@/utils/validate'
+import { /* createNe, */ getNetworkInterfaces } from '@/api/form'
 
 export default {
   data() {
@@ -69,7 +72,6 @@ export default {
       }
     }
     var validateNeId = (rule, value, callback) => {
-      console.log(value)
       if (value === '') {
         callback(new Error('please input NE ID'))
       } else if (isNaN(value - parseFloat(value))) {
@@ -97,6 +99,7 @@ export default {
       }
     }
     return {
+      netIfList: null,
       form: {
         neCount: '',
         firstNeId: '',
@@ -108,10 +111,10 @@ export default {
       },
       rules: {
         neCount: [
-          { validator: validateCount, trigger: 'blur' }
+          { required: true, validator: validateCount, trigger: 'blur' }
         ],
         firstNeId: [
-          { validator: validateNeId, trigger: 'blur' }
+          { required: true, validator: validateNeId, trigger: 'blur' }
         ],
         neType: [
           { required: true, message: 'please select NE Type', trigger: 'change' }
@@ -120,10 +123,10 @@ export default {
           { required: true, message: 'please select NE Version', trigger: 'change' }
         ],
         firstNeIp: [
-          { validator: validateNeIp, trigger: 'blur' }
+          { required: true, validator: validateNeIp, trigger: 'blur' }
         ],
         mask: [
-          { validator: validateNeMask, trigger: 'blur' }
+          { required: true, validator: validateNeMask, trigger: 'blur' }
         ],
         networkInterface: [
           { required: true, message: 'please select Network Interface', trigger: 'change' }
@@ -131,10 +134,23 @@ export default {
       }
     }
   },
+  created() {
+    console.log(this.networkInterface)
+    this.initNetworkInterfaces()
+  },
   methods: {
+    initNetworkInterfaces() {
+      getNetworkInterfaces(this.listQuery).then(response => {
+        this.netIfList = response.data.netIfLists
+        console.log(this.netIfList)
+      })
+    },
     onSubmit(formName) {
+      console.log('swp')
+      console.log(this.networkInterface)
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          // createNe(this.form)
           alert('submit!')
         } else {
           console.log('error submit!!')
