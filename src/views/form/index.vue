@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form ref="form" :model="form" status-icon :rules="rules" label-width="160px">
       <el-form-item label="The Number of NEs" prop="neCount">
-        <el-input v-model="form.neCount" style="width:250px"></el-input>
+        <el-input v-model.number="form.neCount" style="width:250px"></el-input>
       </el-form-item>
       <el-form-item label="The First NE ID" prop="firstNeId">
-        <el-input v-model="form.firstNeId" style="width:250px"></el-input>       
+        <el-input v-model.number="form.firstNeId" style="width:250px"></el-input>       
       </el-form-item>
       <el-form-item label="NE Type" prop="neType">
         <el-select v-model="form.neType" placeholder="please select NE Type" style="width:250px">
