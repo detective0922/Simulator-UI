@@ -58,7 +58,7 @@
 
 <script>
 import { validateIp, validateIpMask } from '@/utils/validate'
-import { /* createNe, */ getNetworkInterfaces } from '@/api/form'
+import { createNe, getNetworkInterfaces } from '@/api/form'
 
 export default {
   data() {
@@ -135,7 +135,6 @@ export default {
     }
   },
   created() {
-    console.log(this.networkInterface)
     this.initNetworkInterfaces()
   },
   methods: {
@@ -146,11 +145,9 @@ export default {
       })
     },
     onSubmit(formName) {
-      console.log('swp')
-      console.log(this.networkInterface)
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // createNe(this.form)
+          createNe(this.form.neCount, this.form.firstNeId, this.form.neType, this.form.firstNeIp, this.form.mask, this.form.neVersion, this.form.networkInterface)
           alert('submit!')
         } else {
           console.log('error submit!!')
