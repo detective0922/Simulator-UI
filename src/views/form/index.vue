@@ -34,7 +34,7 @@
         <el-input v-model="form.mask" style="width:250px"></el-input>
       </el-form-item>
       <el-form-item label="Network Interface" prop="networkInterface">
-         <el-select v-model="form.networkInterface" placeholder="please select Network Interface" style="width:300px">
+         <el-select v-model.number="form.networkInterface" placeholder="please select Network Interface" style="width:300px">
           <!-- <el-option label="Broadcom1" value="Broadcom1"></el-option>
           <el-option label="Broadcom2" value="Broadcom2"></el-option> -->
           <el-option v-for="netIf in netIfList" :key="netIf.index" :label="netIf.description" :value="netIf.index">
