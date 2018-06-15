@@ -33,6 +33,12 @@
           <el-tag :type="nestatus|statusFilter">{{nestatus}}</el-tag>
         </template>
       </el-table-column>
+      <el-table-column label="Operation" align="center">
+        <template slot-scope="scope">
+          <el-button type="primary" icon="el-icon-edit" size="small" class="editButton" @click="editNe">Edit</el-button>
+          <el-button type="danger" icon="el-icon-delete" size="small" class="deleteButton" @click="deleteNe">Delete</el-button>
+        </template>
+      </el-table-column>
       <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
@@ -85,7 +91,64 @@ export default {
         this.listLoading = false
         this.nestatus = 'deActivated'
       })
+    },
+    editNe() {
+      this.$confirm('Will delete NE, Contiune?', 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        confirmButtonClass: 'confirmButton',
+        cancelButtonClass: 'cancelButton',
+        type: 'warning'
+      }).then(() => {
+        this.$notify({
+          duration: 0,
+          type: 'success',
+          message: 'NE Deleted!'
+        })
+      }).catch(() => {
+        this.$notify({
+          duration: 0,
+          type: 'info',
+          message: 'Deletion Cancelled'
+        })
+      })
+    },
+    deleteNe() {
+      this.$confirm('Will delete NE, Contiune?', 'Warning', {
+        confirmButtonClass: 'confirmButton',
+        cancelButtonClass: 'cancelButton',
+        confirmButtonText: 'No',
+        cancelButtonText: 'Yes',
+        type: 'warning'
+      }).then(() => {       
+        this.$notify({
+          duration: 0,
+          type: 'info',
+          message: 'Deletion Cancelled'
+        })
+      }).catch(() => {
+        this.$notify({
+          duration: 0,
+          type: 'success',
+          message: 'NE Deleted!'
+        })
+      })
     }
   }
 }
 </script>
+
+<style>
+.editButton{
+  width: 80px;
+}
+.deleteButton{
+  width: 80px;
+}
+.confirmButton{
+  width: 50px
+}
+.cancelButton{
+  width: 50px
+}
+</style>
