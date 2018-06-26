@@ -35,7 +35,7 @@
       </el-table-column>
       <el-table-column label="Operation" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" size="small" class="editButton" @click="editNe">Edit</el-button>
+          <el-button type="primary" icon="el-icon-refresh" size="small" class="reloadButton" @click="reloadNe">Reload</el-button>
           <el-button type="danger" icon="el-icon-delete" size="small" class="deleteButton" @click="deleteNe">Delete</el-button>
         </template>
       </el-table-column>
@@ -92,8 +92,8 @@ export default {
         this.nestatus = 'deActivated'
       })
     },
-    editNe() {
-      this.$confirm('Will delete NE, Contiune?', 'Warning', {
+    reloadNe() {
+      this.$confirm('Will reload NE, Contiune?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         confirmButtonClass: 'confirmButton',
@@ -103,13 +103,13 @@ export default {
         this.$notify({
           duration: 0,
           type: 'success',
-          message: 'NE Deleted!'
+          message: 'NE Reloaded!'
         })
       }).catch(() => {
         this.$notify({
           duration: 0,
           type: 'info',
-          message: 'Deletion Cancelled'
+          message: 'Reload Cancelled'
         })
       })
     },
@@ -120,7 +120,7 @@ export default {
         confirmButtonText: 'No',
         cancelButtonText: 'Yes',
         type: 'warning'
-      }).then(() => {       
+      }).then(() => {
         this.$notify({
           duration: 0,
           type: 'info',
@@ -139,11 +139,11 @@ export default {
 </script>
 
 <style>
-.editButton{
-  width: 80px;
+.reloadButton{
+  width: 90px;
 }
 .deleteButton{
-  width: 80px;
+  width: 90px;
 }
 .confirmButton{
   width: 50px
